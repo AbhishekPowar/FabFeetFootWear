@@ -1,0 +1,13 @@
+package model;
+
+public class Products {
+
+	public int pid;
+	
+	
+	public static void main(String[] args) {
+		System.out.println("Hello world");
+	}
+	
+
+}

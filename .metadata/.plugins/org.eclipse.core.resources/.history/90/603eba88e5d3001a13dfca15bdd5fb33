@@ -1,0 +1,69 @@
+package model;
+
+import persistance.EmployeesDAO;
+import persistance.InventoryDAO;
+
+public class Owner {
+	private int ownerId;
+	private String password;
+
+	public void displayAllOrders() {
+		
+		return;
+	}
+
+	public void displayBranchOrders(int bid) {
+		// call the displayBranchOrdersdao
+
+		return;
+	}
+
+	public void displayAllStock() {
+
+		InventoryDAO.displayAllStock();
+		return;
+	}
+
+	public static void displayBranchStock(int bid) {
+		// call the dislayBrnachStockdao
+		InventoryDAO.displayStockById(bid);
+		return;
+	}
+
+	public void displayEmployee() {
+
+		EmployeesDAO.displayAll();
+		return;
+	}
+
+	public void displayAllByBranchID(int bid) {
+
+	
+		EmployeesDAO.displayAllByBranchID(bid);
+		return;
+	}
+
+	public void displayRequest(int bid) {
+		// call the displayRequestdao with bid;
+		return;
+
+	}
+
+	public void displayFeedback() {
+		// call the displayFeedbackdao
+
+		return;
+	}
+
+	public static void main(String[] args) {
+		Owner on = new Owner();
+//		Employee test
+//		on.displayEmployee();
+//		on.displayAllByBranchID(4);
+		
+//		on.displayAllStock();
+		on.displayBranchStock(3);
+
+	}
+
+}

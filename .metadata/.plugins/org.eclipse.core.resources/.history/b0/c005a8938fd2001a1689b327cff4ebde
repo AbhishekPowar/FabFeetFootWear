@@ -1,0 +1,16 @@
+package model;
+
+public class Products {
+	static a;
+	static {
+		
+		a=10;
+	}
+	
+//	TODO as
+	public static void main(String[] args) {
+		System.out.println("Hello world"+a);
+	}
+	
+
+}

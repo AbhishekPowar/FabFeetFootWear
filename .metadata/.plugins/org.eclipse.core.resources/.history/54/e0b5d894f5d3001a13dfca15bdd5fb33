@@ -1,0 +1,189 @@
+package model;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.BufferedOutputStream;
+import java.sql.Date;
+import java.util.Calendar;
+import java.util.Scanner;
+import persistance.*;
+
+import persistance.OrdersDAO;
+
+import java.io.InputStreamReader;
+
+public class Branches {
+	 String branchName;
+	 int branchId;
+	 int managerId;
+	 String managerPassword;
+	
+	static Scanner scanner = new Scanner(System.in);
+	static BufferedReader scan;
+	static {
+		try {
+			scan = new BufferedReader(new InputStreamReader(System.in));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public String getBranchName() {
+		return branchName;
+	}
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
+	}
+	public int getBranchId() {
+		return branchId;
+	}
+	public void setBranchId(int branchId) {
+		this.branchId = branchId;
+	}
+	public int getManagerId() {
+		return managerId;
+	}
+	public void setManagerId(int managerId) {
+		this.managerId = managerId;
+	}
+	public String getManagerPassword() {
+		return managerPassword;
+	}
+	public void setManagerPassword(String managerPassword) {
+		this.managerPassword = managerPassword;
+	}
+	
+   
+	public static void addProduct(){
+			Products.addProduct();
+		}
+//	public  void displayBranchStock(int bid)
+//	{
+//		//call the displayBranchStock
+//		return;
+//		
+//	}
+	
+//	public  void sendRequest() {
+//		//call the sendRequestdao to populate the request table
+//		
+//		
+//	}
+//	public static void addCustomer(){
+//		try {
+//			Customers cust = new Customers();
+//			// System.out.println("Enter Customer ID");
+//			cust.setCustomerId(0);
+//			
+//
+//			System.out.println("Enter Customer Name");
+//			cust.setCustomerName(scan.readLine());
+//
+//			
+//			System.out.println("Enter Customer Phone Number");
+//			cust.setPhoneNo(
+//				scan.readLine()
+//				);
+//			
+//
+//			System.out.println("Enter Customer Address");
+//			cust.setAddress(scan.readLine());
+//
+//			// cust.display();
+//			CustomerDAO.insertIntoCustomersTable(cust);
+//
+//		} catch (Exception e) {
+//			System.out.println("Buffer Read error");
+//			e.printStackTrace();
+//		}
+//		
+//	}
+
+	
+
+//	public void placeOrder(){
+//		
+//		int orderId = 0;
+//		int customerId;
+//		int productId;
+//		int branchId;
+//		int size;
+//		int quantity;
+//		double amount;
+//		Date orderDate;
+//
+//		try {
+//			Orders order = new Orders();
+//
+//			System.out.println("Enter Customer Id");
+//			customerId = Integer.parseInt(scan.readLine());
+//
+//			System.out.println("Enter Product Id");
+//			productId =  Integer.parseInt(scan.readLine());
+//			
+//			// System.out.println("Enter Branch Id");
+//			//branchId =  Integer.parseInt(scan.readLine());
+//			branchId = this.getBranchId();
+//		
+//			System.out.println("Enter Product Size");
+//			size = Integer.parseInt(scan.readLine());
+//
+//			System.out.println("Enter Product Quantity");
+//			quantity = Integer.parseInt(scan.readLine());
+//
+//
+//			System.out.println("Enter Product Cost");
+//			amount = Integer.parseInt(scan.readLine());
+//			
+//			// System.out.println("Enter Date");
+//			Calendar today = Calendar.getInstance();
+//			//today.clear(Calendar.HOUR); today.clear(Calendar.MINUTE); today.clear(Calendar.SECOND);
+//			Date todayDate = (Date) today.getTime();
+//			orderDate = todayDate; //.toString();
+//
+//			order.setOrderId(orderId);
+//			order.setCustomerId(customerId);
+//			order.setProductId(productId);
+//			order.setbranchId(branchId);
+//			order.setSize(size);
+//			order.setQuantity(quantity);
+//			order.setAmount(amount);
+//			order.setOrderDate(orderDate);
+//			
+//			OrdersDAO.placeOrder(order);
+//
+//			// order.display();
+//
+//			
+//
+//		} catch (Exception e) {
+//			System.out.println("Unable to place order");
+//			e.printStackTrace();
+//			
+//		}
+//
+//	}
+//	public void displayEmployees(int bid) {
+//		EmployeesDAO.displayAllByBranchID(bid);
+//		return;
+//	}
+
+
+
+//	public static void main(String[] args) {
+//		Branches manager = new Branches();	
+//		
+//		manager.displayEmployees(1);
+//		
+//		
+//		
+//		
+//	}
+
+}
