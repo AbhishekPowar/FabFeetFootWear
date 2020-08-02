@@ -4,7 +4,9 @@ import java.sql.Date;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Map;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import persistance.OrdersDAO;
@@ -131,36 +133,54 @@ public class Orders {
 			branchId = bid;
 
 			System.out.println("");
-			boolean productBranchExists = Inventory.getProductbyIdAndBid(
+			Map<Integer, ArrayList<Double>>  OrdSizeMap = Inventory.getProductbyIdAndBid(
 					productId, bid);
-			if (productBranchExists == true) {
-
+			if (OrdSizeMap !=null) {
+				
 				System.out.println("Enter Product Size");
 				size = Integer.parseInt(br.readLine());
+				
+				if (OrdSizeMap.containsKey(size)){
+					ArrayList<Double> data = OrdSizeMap.get(size);
+					double  inventoryQuantity = data.get(0);
+					double InventoryPrice = data.get(1);
+					
+					System.out.println("Enter Product Quantity");
+					quantity = Integer.parseInt(br.readLine());
 
-				System.out.println("Enter Product Quantity");
-				quantity = Integer.parseInt(br.readLine());
+					if (quantity <= inventoryQuantity){
+//						System.out.println("Enter Product Cost");
+//						amount = Integer.parseInt(br.readLine());
+						amount = InventoryPrice;
+						
+						// System.out.println("Enter Date");
+						SimpleDateFormat sdf = new SimpleDateFormat(
+								"yyyy-MM-dd HH:mm:ss");
+						Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+						String ts = sdf.format(timestamp);
+						orderDate = ts;
 
-				System.out.println("Enter Product Cost");
-				amount = Integer.parseInt(br.readLine());
+						order.setOrderId(orderId);
+						order.setCustomerId(customerId);
+						order.setProductId(productId);
+						order.setbranchId(branchId);
+						order.setSize(size);
+						order.setQuantity(quantity);
+						order.setAmount(amount);
+						order.setOrderDate(orderDate);
 
-				// System.out.println("Enter Date");
-				SimpleDateFormat sdf = new SimpleDateFormat(
-						"yyyy-MM-dd HH:mm:ss");
-				Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-				String ts = sdf.format(timestamp);
-				orderDate = ts;
+						OrdersDAO.placeOrder(order);
+					}
+					else{
+						System.out.println("Quantity of "+quantity+" not available for product ID "+productId+" of size "+size);
+					}
+					
+				}
+				else{
+					System.out.println("Size "+size+"not availabe for Product ID "+productId);
+				}
 
-				order.setOrderId(orderId);
-				order.setCustomerId(customerId);
-				order.setProductId(productId);
-				order.setbranchId(branchId);
-				order.setSize(size);
-				order.setQuantity(quantity);
-				order.setAmount(amount);
-				order.setOrderDate(orderDate);
-
-				OrdersDAO.placeOrder(order);
+				
 			}
 			else{
 				System.out.println("Product not available");

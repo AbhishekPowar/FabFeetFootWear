@@ -3,6 +3,8 @@ package model;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Map;
 
 import persistance.EmployeesDAO;
 import persistance.InventoryDAO;
@@ -92,7 +94,7 @@ public class Inventory {
 		return;
 	}
 	
-	public static  boolean getProductbyIdAndBid(int pid,int bid){
+	public static  Map<Integer, ArrayList<Double>>  getProductbyIdAndBid(int pid,int bid){
 		return InventoryDAO.getProductbyIdAndBid(pid, bid);
 	}
 	

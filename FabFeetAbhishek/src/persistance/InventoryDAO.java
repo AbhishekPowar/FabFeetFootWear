@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import model.Inventory;
@@ -131,11 +134,12 @@ public class InventoryDAO {
 		}
 		
 	}
-	public static  boolean getProductbyIdAndBid(int pid,int bid)
+	public static  Map<Integer, ArrayList<Double>> getProductbyIdAndBid(int pid,int bid)
 	{
 		Connection con = ConnectToDB.getConnection();
 		String sql="select * from inventory  where productid=? and branchId=?";
 		boolean exists = false;
+		Map<Integer, ArrayList<Double>> hmap=null;
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, pid);
@@ -146,6 +150,13 @@ public class InventoryDAO {
 				System.out.println(" no product found by the product id :"+pid+" in Branch "+bid);
 			else
 			{
+				hmap = new HashMap<Integer, ArrayList<Double>>();
+				ArrayList<Double> data ;
+				
+				
+				
+				
+				
 				exists = true;
 				do {
 					Inventory item = new Inventory();
@@ -155,6 +166,11 @@ public class InventoryDAO {
 					item.setPrice(rs.getDouble("price"));
 					item.setQuantity(rs.getInt("quantity"));
 					item.display();
+					
+					data= new ArrayList<Double>();
+					data.add((double) item.getQuantity());
+					data.add(item.getPrice());
+					hmap.put(item.getSize(),data);
 				}while(rs.next());
 			}
 			
@@ -163,12 +179,24 @@ public class InventoryDAO {
 			e.printStackTrace();
 		}
 		ConnectToDB.closeConnection(con);
-		return exists;
+		return hmap;
 		
 	}
 
 	public static void main(String[] args) {
-		insertIntoInventory(2);
+//		insertIntoInventory(2);
+		Map<Integer, ArrayList<Double>> hmap= new HashMap<Integer, ArrayList<Double>>();
+		ArrayList<Double> data ;
+		
+		data= new ArrayList<Double>();
+		data.add((double) 2);
+		data.add((double) 3);
+		hmap.put(1,data);
+		hmap.put(2,data);
+		System.out.println(hmap);
+		
+		System.out.println(hmap.containsKey(3));
+		
 	}
 	
 	
