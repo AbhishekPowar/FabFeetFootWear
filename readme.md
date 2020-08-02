@@ -41,6 +41,8 @@ Clone the project if you want to use just SQlite Database.
 
 >Console will ask you for input
 
+###Login Modes
+
 #### Owner Login
 >Info for logging in as Owner
 `owner id = 1`
@@ -54,6 +56,13 @@ You can change it later
 You can change it later
 Manger paswords follow NATO convention i.e `alpha, beta, charlie`
 
+#### Customer Login
+> No password required 
+
+#### TestMode
+> Use this to view data in Tables
+> Only for testing purpose 
+
 #### Customer ID Range
 > `1 to 10`
 
@@ -63,8 +72,6 @@ Manger paswords follow NATO convention i.e `alpha, beta, charlie`
 #### Branches 
 > `1 to 6`
 
-#### TestMode
-> Use this to view data in Tables
 
 
 
