@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Map;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import persistance.OrdersDAO;
 
@@ -108,6 +109,68 @@ public class Orders {
 				+ amount + ", orderDate=" + orderDate + "]";
 	}
 
+	static int getValidSize(Map<Integer, ArrayList<Double>> OrdSizeMap) {
+		int size;
+
+		try {
+			System.out.println("\nEnter Product Size");
+			size = Integer.parseInt(br.readLine());
+			if (OrdSizeMap.containsKey(size)) {
+				return size;
+			} else {
+				System.out.println("\ninvalid Size " + size);
+				System.out
+						.println("Available Sizes are " + OrdSizeMap.keySet());
+				System.out.println("1. Retry and 2. Cancel");
+				int choice;
+				choice = Integer.parseInt(br.readLine());
+				if (choice == 1) {
+					return getValidSize(OrdSizeMap);
+				}
+				return -1;
+			}
+
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
+	static int getValidQuantity(double inventoryQuantity) {
+		int quantity;
+
+		try {
+			System.out.println("\nEnter Product Quantity");
+			quantity = Integer.parseInt(br.readLine());
+			if (inventoryQuantity >= quantity) {
+				return quantity;
+			} else {
+				System.out.println("\nInvalid Quantity");
+				System.out
+						.println("Available quantity is " + inventoryQuantity);
+				System.out.println("1. Retry and 2. Cancel");
+				int choice;
+				choice = Integer.parseInt(br.readLine());
+				if (choice == 1) {
+					return getValidQuantity(inventoryQuantity);
+				}
+				return -1;
+			}
+
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
 	public static void placeOrder(int bid) {
 
 		int orderId = 0;
@@ -124,11 +187,10 @@ public class Orders {
 
 			System.out.println("Enter Customer Id");
 			customerId = Integer.parseInt(br.readLine());
-			if (Customers.customerExists(customerId)!=true){
+			if (Customers.customerExists(customerId) != true) {
 				System.out.println("Customer Not Registered");
 				return;
 			}
-			
 
 			System.out.println("Enter Product Id");
 			productId = Integer.parseInt(br.readLine());
@@ -138,56 +200,48 @@ public class Orders {
 			branchId = bid;
 
 			System.out.println("");
-			Map<Integer, ArrayList<Double>>  OrdSizeMap = Inventory.getProductbyIdAndBid(
-					productId, bid);
-			if (OrdSizeMap !=null) {
-				
-				System.out.println("\nEnter Product Size");
-				size = Integer.parseInt(br.readLine());
-				
-				if (OrdSizeMap.containsKey(size)){
-					ArrayList<Double> data = OrdSizeMap.get(size);
-					double  inventoryQuantity = data.get(0);
-					double InventoryPrice = data.get(1);
-					
-					System.out.println("Enter Product Quantity");
-					quantity = Integer.parseInt(br.readLine());
+			Map<Integer, ArrayList<Double>> OrdSizeMap = Inventory
+					.getProductbyIdAndBid(productId, bid);
+			if (OrdSizeMap != null) {
 
-					if (quantity <= inventoryQuantity){
-//						System.out.println("Enter Product Cost");
-//						amount = Integer.parseInt(br.readLine());
-						amount = InventoryPrice;
-						
-						// System.out.println("Enter Date");
-						SimpleDateFormat sdf = new SimpleDateFormat(
-								"yyyy-MM-dd HH:mm:ss");
-						Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-						String ts = sdf.format(timestamp);
-						orderDate = ts;
-
-						order.setOrderId(orderId);
-						order.setCustomerId(customerId);
-						order.setProductId(productId);
-						order.setbranchId(branchId);
-						order.setSize(size);
-						order.setQuantity(quantity);
-						order.setAmount(amount);
-						order.setOrderDate(orderDate);
-
-						OrdersDAO.placeOrder(order);
-					}
-					else{
-						System.out.println("Quantity of "+quantity+" not available for product ID "+productId+" of size "+size);
-					}
-					
+				// System.out.println("\nEnter Product Size");
+				size = getValidSize(OrdSizeMap);
+				if (size == -1) {
+					return;
 				}
-				else{
-					System.out.println("Size "+size+" not availabe for Product ID "+productId);
-				}
+				ArrayList<Double> data = OrdSizeMap.get(size);
+				double inventoryQuantity = data.get(0);
+				double InventoryPrice = data.get(1);
 
-				
-			}
-			else{
+				// System.out.println("Enter Product Quantity");
+				quantity = getValidQuantity(inventoryQuantity);
+
+				if (quantity == -1) {
+					return;
+				}
+				// System.out.println("Enter Product Cost");
+				// amount = Integer.parseInt(br.readLine());
+				amount = InventoryPrice;
+
+				// System.out.println("Enter Date");
+				SimpleDateFormat sdf = new SimpleDateFormat(
+						"yyyy-MM-dd HH:mm:ss");
+				Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+				String ts = sdf.format(timestamp);
+				orderDate = ts;
+
+				order.setOrderId(orderId);
+				order.setCustomerId(customerId);
+				order.setProductId(productId);
+				order.setbranchId(branchId);
+				order.setSize(size);
+				order.setQuantity(quantity);
+				order.setAmount(amount);
+				order.setOrderDate(orderDate);
+
+				OrdersDAO.placeOrder(order);
+
+			} else {
 				System.out.println("Product not available");
 			}
 			// order.display();
