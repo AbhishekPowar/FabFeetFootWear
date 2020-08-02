@@ -186,7 +186,7 @@ public class InventoryDAO {
 	
 	public static void updateInventory(int pid,int bid,int size,int quantity){
 		Connection con = ConnectToDB.getConnection();
-		String sql="update inventory set quantity = -? where  productId = ? and branchId= ? and sizes = ?";
+		String sql="update inventory set quantity =quantity -? where  productId = ? and branchId= ? and sizes = ?";
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, quantity);
