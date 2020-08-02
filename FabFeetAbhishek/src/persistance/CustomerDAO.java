@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import model.Branches;
 import model.Customers;
+import model.Products;
 
 
 public class CustomerDAO{
@@ -63,14 +64,41 @@ public class CustomerDAO{
          return flag;
     	
     }
-    public static void main(String[] args)
-    {
-//    	Customers cust = new Customers();
-//    	Branches.addCustomer();
-//    	
-//    	Branches
-    	
+    
+    public static void displayAll(){
+        Connection con;
+        con = ConnectToDB.getConnection();
+		String sql=" select * from customers ";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs= ps.executeQuery();
+			if(rs.next()==false)   
+				System.out.println("No customers exist");
+			else {
+					Customers cust;
+//					int productId;
+//					String productName;
+				do 
+				{
+					cust= new Customers();
+					cust.setCustomerId(rs.getInt("CustomerID"));
+					cust.setCustomerName(rs.getString("CustomerName"));
+					cust.setPhoneNo(rs.getString("phone"));
+					cust.setAddress(rs.getString("address"));
+					cust.display();
+					
+				}while(rs.next());
+			}
+		} catch (SQLException e) {
+			System.out.println("Error in EMPDAO while  displayAll");
+			e.printStackTrace();
+		}
+
+        ConnectToDB.closeConnection(con);     
     }
+	
+    
+   
 
     
    

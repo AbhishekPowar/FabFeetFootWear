@@ -93,9 +93,8 @@ public class Customers {
 	}
 
 	public static void productSearch() {
-		
+
 		Inventory.productSearch();
-		
 
 		return;
 	}
@@ -104,18 +103,22 @@ public class Customers {
 		Reviews.checkReviewbyName();
 		return;
 	}
+
 	//
 	public static void writeReview() {
 		Reviews.writeReview();
 	}
 
-	public static boolean customerExists(int Cid){
+	public static boolean customerExists(int Cid) {
 		return CustomerDAO.customerExists(Cid);
 	}
-	// public static void main(String[] args) {
-	// Customers cust = new Customers();
-	//
-	//
-	// }
+
+	public static void displayAll() {
+		CustomerDAO.displayAll();
+	}
+
+	public static void main(String[] args) {
+		displayAll();
+	}
 
 }

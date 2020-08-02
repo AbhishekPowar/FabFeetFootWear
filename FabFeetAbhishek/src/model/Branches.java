@@ -90,8 +90,19 @@ public class Branches {
 		return;
 	}
 
+	public static void ShowBranchDetails(){
+		BranchesDAO.ShowBranchDetails();
+	}
+	@Override
+	public String toString() {
+		return "Branches [branchName=" + branchName + ", branchId=" + branchId
+				+ ", managerId=" + managerId + ", managerPassword="
+				+ managerPassword + "]";
+	}
 
-
+	public void display(){
+		System.out.println(this.toString());
+	}
 //	public static void main(String[] args) {
 //		Branches manager = new Branches();	
 //		
