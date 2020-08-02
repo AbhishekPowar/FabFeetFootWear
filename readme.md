@@ -55,13 +55,13 @@ You can change it later
 Manger paswords follow NATO convention i.e `alpha, beta, charlie`
 
 #### Customer ID Range
-`1 t0 10`
+> `1 to 10`
 
 #### Product ID Range
-`1 to 15`
+> `1 to 15`
 
 #### Branches 
-`1 to 6`
+> `1 to 6`
 
 
 
