@@ -63,6 +63,8 @@ Manger paswords follow NATO convention i.e `alpha, beta, charlie`
 > Use this to view data in Tables
 > Only for testing purpose 
 
+### Valid Input for respective tables
+
 #### Customer ID Range
 > `1 to 10`
 
