@@ -57,10 +57,10 @@ Manger paswords follow NATO convention i.e `alpha, beta, charlie`
 #### Customer ID Range
 `1 t0 10`
 
-### Product ID Range
+#### Product ID Range
 `1 to 15`
 
-### Branches 
+#### Branches 
 `1 to 6`
 
 
