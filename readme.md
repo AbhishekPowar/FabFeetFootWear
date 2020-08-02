@@ -63,6 +63,9 @@ Manger paswords follow NATO convention i.e `alpha, beta, charlie`
 #### Branches 
 > `1 to 6`
 
+#### TestMode
+> Use this to view data in Tables
+
 
 
 
