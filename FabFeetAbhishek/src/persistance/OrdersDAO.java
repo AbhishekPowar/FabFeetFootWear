@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import model.Inventory;
 import model.Orders;
 
 public class OrdersDAO {
@@ -97,12 +98,14 @@ public class OrdersDAO {
 				System.out.println(" Order placed ");
 				System.out.println("Bill amount = " + ord.getQuantity()
 						* ord.getAmount());
+				Inventory.updateInventory(ord.getProductId(),
+						ord.getbranchId(), ord.getSize(), ord.getQuantity());
 
 			} else
 				System.out.println("order can not be processed");
 		} catch (SQLException e) {
-			System.out.println(" place order in orders Failed");
-			e.printStackTrace();
+			System.out.println(" Placing order Failed");
+			// e.printStackTrace();
 
 		}
 		ConnectToDB.closeConnection(con);

@@ -132,6 +132,7 @@ public class InventoryDAO {
 			System.out.println(" cant display the iventory items by product name");
 			e.printStackTrace();
 		}
+		ConnectToDB.closeConnection(con);     
 		
 	}
 	public static  Map<Integer, ArrayList<Double>> getProductbyIdAndBid(int pid,int bid)
@@ -175,12 +176,35 @@ public class InventoryDAO {
 			}
 			
 		} catch (SQLException e) {
-			System.out.println(" cant display the iventory items by productid and size");
+			System.out.println(" cant display the inventory items by productid and size");
 			e.printStackTrace();
 		}
 		ConnectToDB.closeConnection(con);
 		return hmap;
 		
+	}
+	
+	public static void updateInventory(int pid,int bid,int size,int quantity){
+		Connection con = ConnectToDB.getConnection();
+		String sql="update inventory set quantity = -? where  productId = ? and branchId= ? and sizes = ?";
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, quantity);
+			ps.setInt(2, pid);
+			ps.setInt(3, bid);
+			ps.setInt(4, size);
+			int row=ps.executeUpdate();
+			if (row>0){
+				System.out.println("Inventory updated");
+			}
+			else{
+				System.out.println("Error while updating Inventory");
+			}
+		} catch (SQLException e) {
+			System.out.println(" cant display the iventory items by product name");
+			
+		}
+		ConnectToDB.closeConnection(con);     
 	}
 
 	public static void main(String[] args) {

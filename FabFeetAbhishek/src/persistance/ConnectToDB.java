@@ -14,7 +14,7 @@ public class ConnectToDB{
 //			connect=DriverManager.getConnection("jdbc:sqlite:new.db");
 			
 			if(connect!=null) {
-				System.out.println("Connected to database");
+//				System.out.println("Connected to database");
 				connect.setAutoCommit(true);
 			}
 			else
@@ -35,6 +35,7 @@ public class ConnectToDB{
 	{
 		try {
 			c.close();
+//			System.out.println("Connection Closed");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

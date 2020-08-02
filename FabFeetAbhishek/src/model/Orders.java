@@ -124,6 +124,11 @@ public class Orders {
 
 			System.out.println("Enter Customer Id");
 			customerId = Integer.parseInt(br.readLine());
+			if (Customers.customerExists(customerId)!=true){
+				System.out.println("Customer Not Registered");
+				return;
+			}
+			
 
 			System.out.println("Enter Product Id");
 			productId = Integer.parseInt(br.readLine());
@@ -137,7 +142,7 @@ public class Orders {
 					productId, bid);
 			if (OrdSizeMap !=null) {
 				
-				System.out.println("Enter Product Size");
+				System.out.println("\nEnter Product Size");
 				size = Integer.parseInt(br.readLine());
 				
 				if (OrdSizeMap.containsKey(size)){
@@ -177,7 +182,7 @@ public class Orders {
 					
 				}
 				else{
-					System.out.println("Size "+size+"not availabe for Product ID "+productId);
+					System.out.println("Size "+size+" not availabe for Product ID "+productId);
 				}
 
 				

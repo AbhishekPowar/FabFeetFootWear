@@ -94,6 +94,10 @@ public class Inventory {
 		return;
 	}
 	
+	public static void updateInventory(int pid,int bid,int size,int quantity){
+		InventoryDAO.updateInventory(pid, bid, size, quantity);
+	}
+	
 	public static  Map<Integer, ArrayList<Double>>  getProductbyIdAndBid(int pid,int bid){
 		return InventoryDAO.getProductbyIdAndBid(pid, bid);
 	}

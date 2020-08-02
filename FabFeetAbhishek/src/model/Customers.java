@@ -109,6 +109,9 @@ public class Customers {
 		Reviews.writeReview();
 	}
 
+	public static boolean customerExists(int Cid){
+		return CustomerDAO.customerExists(Cid);
+	}
 	// public static void main(String[] args) {
 	// Customers cust = new Customers();
 	//

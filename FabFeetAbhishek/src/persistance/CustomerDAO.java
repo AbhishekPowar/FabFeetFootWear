@@ -38,6 +38,31 @@ public class CustomerDAO{
 
         ConnectToDB.closeConnection(con);     
     }
+    
+    public static boolean customerExists(int Cid){
+    	 Connection con = ConnectToDB.getConnection();   
+         String sql = "select * from customers where customerID = ?";
+         boolean flag = false;
+         try {
+ 			PreparedStatement ps = con.prepareStatement(sql);
+             ps.setInt(1, Cid);
+             
+
+ 			ResultSet rs=ps.executeQuery();
+             
+ 			if(rs.next() != false)
+ 				flag= true;
+ 			
+ 				
+ 		} catch (SQLException e) {
+ 			System.out.println("Error in CustomerDAO while  inserting");
+// 			e.printStackTrace();
+ 		}
+
+         ConnectToDB.closeConnection(con);   
+         return flag;
+    	
+    }
     public static void main(String[] args)
     {
 //    	Customers cust = new Customers();
